@@ -51,9 +51,43 @@ select * from table3
 where Washer and AC="yes"
 order by Sno;
 
+SET SQL_SAFE_UPDATES=0;
+update table3 SET Storage='No' where Sno = '4' and Storage = 'yes';
+SET SQL_SAFE_UPDATES=1;
+commit;
+SELECT * FROM capston_project.table3;
+
 -- Q2
 Select * from table3
-where Hardwood_floors="Yes" and Roofdeck="No" and Storage="No"
+where Hardwood_floors="yes" and Roofdeck='No' and Storage='No'
 Order By Sno Desc;
 
+-- Q3
+select * from table3
+where AC='yes' and Parking='yes' and Fireplace='yes' and Dishwasher= 'yes'
+Order by Sno;
+
+-- Q4
+select Roofdeck, Storage, Count(*) from table3
+where Roofdeck='No' and Storage='No';
+
+-- Q5
+select Parking, Fireplace, Dishwasher Count(*) from table3
+where Parking='yes' and Fireplace='yes' or Dishwasher='yes';
+
+-- Join Query
+-- Q1
+SELECT * from table1, table2
+WHERE Area >= (SELECT AVG(Area) from table2);
+
+-- Q2
+SELECT table2.Pet_allowed, table2.No_of_Bed
+FROM table2
+WHERE table2.Pet_allowed = 'yes'
+AND table2.No_of_Bed > 3;
+
+-- Q3
+select table2.Bathroom, table3.AC
+from table2, table3
+where table2.Bathroom > 2 and table3.AC = 'yes';
 
